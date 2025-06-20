@@ -4,6 +4,8 @@ import datetime
 import winsound
 from queue import Queue
 import logging
+import json
+import os
 
 class TaskScheduler:
     def __init__(self, read_aloud_callback=None):
@@ -13,6 +15,8 @@ class TaskScheduler:
         self.scheduler_thread = None
         self.read_aloud_callback = read_aloud_callback
         self.logger = logging.getLogger("EmergencySoundTracker")
+        self.reminders_file = "reminders.json"
+        self._load_reminders()
 
     def add_task(self, task_name, task_time, repeat_daily=False):
         """Add a new task to the scheduler"""
@@ -23,12 +27,14 @@ class TaskScheduler:
         }
         self.scheduled_tasks.append(task)
         self.logger.info(f"Added task: {task_name} at {task_time} (repeat: {repeat_daily})")
+        self._save_reminders()
         return True
 
     def remove_task(self, task_name):
         """Remove a task from the scheduler"""
         self.scheduled_tasks = [t for t in self.scheduled_tasks if t['name'] != task_name]
         self.logger.info(f"Removed task: {task_name}")
+        self._save_reminders()
         return True
 
     def get_tasks(self):
@@ -97,3 +103,18 @@ class TaskScheduler:
         while not self.task_queue.empty():
             tasks.append(self.task_queue.get())
         return tasks
+
+    def _save_reminders(self):
+        try:
+            with open(self.reminders_file, 'w') as f:
+                json.dump(self.scheduled_tasks, f)
+        except Exception as e:
+            self.logger.error(f"Failed to save reminders: {e}")
+
+    def _load_reminders(self):
+        if os.path.exists(self.reminders_file):
+            try:
+                with open(self.reminders_file, 'r') as f:
+                    self.scheduled_tasks = json.load(f)
+            except Exception as e:
+                self.logger.error(f"Failed to load reminders: {e}")

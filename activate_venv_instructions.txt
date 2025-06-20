@@ -1,0 +1,32 @@
+# How to Activate Your Python Virtual Environment for This Project
+
+## 1. Open a Terminal
+- You can use either **PowerShell** or **Command Prompt (cmd.exe)**.
+
+## 2. Switch to the E: Drive (if not already there)
+E:
+
+## 3. Navigate to Your Project Directory
+cd Qualcomm_Hackathon_Team_EaseEdge
+
+## 4. Activate the Virtual Environment
+
+### If you are using **PowerShell**:
+    .\venv\Scripts\Activate.ps1
+
+*If you get an error about running scripts being disabled, run this first:*
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+Then try the activation command again.
+
+### If you are using **Command Prompt (cmd.exe)**:
+    .\venv\Scripts\activate.bat
+
+## 5. Run Your Python Script
+    python ui.py
+    # or
+    python main.py
+
+---
+**Note:**
+- You must activate the virtual environment every time you open a new terminal before running your project scripts.
+- You should see (venv) at the start of your prompt after activation. 

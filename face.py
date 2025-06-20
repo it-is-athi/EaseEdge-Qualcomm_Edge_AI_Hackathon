@@ -13,6 +13,7 @@ tts = pyttsx3.init()
 tts.setProperty('rate', 150)
 
 # === Face Mesh Setup ===
+# type: ignore[attr-defined]
 mp_face = mp.solutions.face_mesh
 face_mesh = mp_face.FaceMesh(max_num_faces=1, min_detection_confidence=0.5)
 
@@ -87,8 +88,12 @@ def detect_attributes(face_crop):
         # Run model
         outputs = session.run(None, {"image": input_blob})
 
-        gender_idx = int(np.argmax(outputs[0]))
-        emotion_idx = int(np.argmax(outputs[1]))
+        # Ensure outputs[0] and outputs[1] are numpy arrays before using argmax
+        gender_logits = np.array(outputs[0])
+        emotion_logits = np.array(outputs[1])
+
+        gender_idx = int(np.argmax(gender_logits))
+        emotion_idx = int(np.argmax(emotion_logits))
 
         gender = GENDERS[gender_idx] if gender_idx < len(GENDERS) else "Unknown"
         emotion = EMOTIONS[emotion_idx] if emotion_idx < len(EMOTIONS) else "Unknown"
