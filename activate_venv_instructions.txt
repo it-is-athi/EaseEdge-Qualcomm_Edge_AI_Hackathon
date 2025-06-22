@@ -23,8 +23,6 @@ Then try the activation command again.
 
 ## 5. Run Your Python Script
     python ui.py
-    # or
-    python main.py
 
 ---
 **Note:**
