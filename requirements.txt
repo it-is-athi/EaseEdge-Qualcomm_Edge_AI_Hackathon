@@ -5,3 +5,4 @@ scipy==1.11.3
 twilio==8.10.0
 sounddevice
 vosk
+python-dotenv
