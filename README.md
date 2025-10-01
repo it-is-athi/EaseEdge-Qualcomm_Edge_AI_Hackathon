@@ -1,6 +1,6 @@
 # EaseEdge - Gesture Detection System
 
-A real-time gesture-based emergency support system designed for individuals with limited mobility. EaseEdge uses computer vision and telephony integration to detect facial gestures (like blinks) and trigger emergency calls automatically. Built for the Qualcomm Edge AI Hackathon by Sudharshan J, Deebika N, and Divya Nandini R.
+A real-time gesture-based emergency support system designed for individuals with limited mobility. EaseEdge uses computer vision and telephony integration to detect facial gestures (like blinks) and trigger emergency calls automatically. Built for the Qualcomm Edge AI Hackathon by Sudharshana J, Deebika N, and Divya Nandini R.
 
 ## Key Features
 - **Real-time Gesture Detection:** Uses your webcam and advanced facial landmark detection to recognize blinks and nods, enabling hands-free emergency signaling.
@@ -41,3 +41,4 @@ A real-time gesture-based emergency support system designed for individuals with
 ## Notes
 - Ensure your `.env` is set up before running.
 - The system uses your webcam for detection. 
+
